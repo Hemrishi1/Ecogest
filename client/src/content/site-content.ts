@@ -131,7 +131,7 @@ export const HOME_CONTENT = {
       href: "/pallets",
       icon: "Layers",
       description: "Standard, customized, two-way stringer, four-way block, and specialized industrial pallets.",
-      image: "/assets/pallets/four-way-pallet.svg",
+      image: "/assets/pallets/four-way-pallet.png",
     },
     {
       id: "industrial-boxes-crates",
@@ -139,7 +139,7 @@ export const HOME_CONTENT = {
       href: "/industrial-products",
       icon: "Box",
       description: "Durable wooden boxes and heavy-duty crates engineered for equipment and sea-worthy export.",
-      image: "/assets/industrial-products/wooden-boxes.svg",
+      image: "/assets/industrial-products/wooden-box.png",
     },
     {
       id: "heavy-duty-packaging",
@@ -147,7 +147,7 @@ export const HOME_CONTENT = {
       href: "/manufacturing",
       icon: "ShieldCheck",
       description: "Custom protective wooden packaging designed to withstand demanding transport stresses.",
-      image: "/assets/industrial-products/wooden-crates.svg",
+      image: "/assets/industrial-products/wooden-crate.png",
     },
     {
       id: "cable-drums",
@@ -155,7 +155,7 @@ export const HOME_CONTENT = {
       href: "/industrial-products",
       icon: "Disc",
       description: "Robust industrial wooden cable drums for safe cable storage, coiling, and global shipping.",
-      image: "/assets/industrial-products/cable-drums.svg",
+      image: "/assets/industrial-products/wooden-cable-drum.png",
     },
   ],
   aboutTeaser: {
@@ -317,7 +317,7 @@ export const MANUFACTURING_CONTENT = {
       name: "Wooden Pallets (Standard & Customized)",
       description:
         "Two-way stringer pallets and four-way block pallets engineered to exact client load specifications and dimensional requirements.",
-      image: "/assets/pallets/four-way-pallet.svg",
+      image: "/assets/pallets/four-way-pallet.png",
       href: "/pallets",
     },
     {
@@ -327,7 +327,7 @@ export const MANUFACTURING_CONTENT = {
       planned: true,
       description:
         "Standardized European Pallet Association (EPAL) certified pallets engineered for seamless global supply chain interchangeability.",
-      image: "/assets/pallets/two-way-pallet.svg",
+      image: "/assets/pallets/two-way-pallet.png",
       href: "/pallets",
     },
     {
@@ -335,7 +335,7 @@ export const MANUFACTURING_CONTENT = {
       name: "Industrial Boxes & Crates",
       description:
         "Heavy-duty wooden boxes and crates built to protect delicate equipment, machinery, and goods during transit.",
-      image: "/assets/industrial-products/wooden-boxes.svg",
+      image: "/assets/industrial-products/wooden-box.png",
       href: "/industrial-products",
     },
     {
@@ -343,7 +343,7 @@ export const MANUFACTURING_CONTENT = {
       name: "Heavy-Duty Packaging",
       description:
         "Engineered protective packaging structures designed for excessive payloads, export shipping, and harsh handling.",
-      image: "/assets/industrial-products/wooden-crates.svg",
+      image: "/assets/industrial-products/wooden-crate.png",
       href: "/industrial-products",
     },
     {
@@ -351,7 +351,7 @@ export const MANUFACTURING_CONTENT = {
       name: "Cable Drums & Specialized Structures",
       description:
         "Precision-built wooden cable drums for wire rope, industrial cable, and specialized cylindrical infrastructure.",
-      image: "/assets/industrial-products/cable-drums.svg",
+      image: "/assets/industrial-products/wooden-cable-drum.png",
       href: "/industrial-products",
     },
   ],
@@ -363,7 +363,7 @@ export const PALLETS_CONTENT = {
     subtitle: "Two-Way and Four-Way Industrial Pallet Solutions",
     description:
       "We engineer durable wooden pallets designed for seamless handling, warehousing efficiency, and global export compliance.",
-    image: "/assets/pallets/four-way-pallet.svg",
+    image: "/assets/pallets/four-way-pallet.png",
   },
   twoWay: {
     title: "Two-Way Wooden Pallet",
@@ -376,7 +376,7 @@ export const PALLETS_CONTENT = {
       "Suitable for Warehousing & Logistics",
       "Easy Material Handling",
     ],
-    image: "/assets/pallets/two-way-pallet.svg",
+    image: "/assets/pallets/two-way-pallet.png",
   },
   fourWay: {
     title: "Four-Way Wooden Pallet",
@@ -389,7 +389,7 @@ export const PALLETS_CONTENT = {
       "Export Suitable",
       "Heavy-Duty Industrial Usage",
     ],
-    image: "/assets/pallets/four-way-pallet.svg",
+    image: "/assets/pallets/four-way-pallet.png",
   },
   typesHeading: "TYPES OF PALLETS",
   types: [
@@ -398,42 +398,42 @@ export const PALLETS_CONTENT = {
       name: "Closed Boarded Pallet",
       description:
         "Designed with two closed-boarded faces and no seams between the nailed top boards.",
-      image: "/assets/pallets/closed-boarded.svg",
+      image: "/assets/pallets/closed-boarded-pallet.png",
     },
     {
       id: "wing-type",
       name: "Wing Type Pallet",
       description:
         "Features extended deck boards over supporting blocks for improved support and handling.",
-      image: "/assets/pallets/wing-type.svg",
+      image: "/assets/pallets/wing-type-pallet.png",
     },
     {
       id: "reversible",
       name: "Reversible Pallet",
       description:
         "Top and bottom decks are identical, allowing the pallet to be reversed and used on both sides.",
-      image: "/assets/pallets/reversible.svg",
+      image: "/assets/pallets/reversible-pallet.png",
     },
     {
       id: "single-deck",
       name: "Single Deck Pallet",
       description:
         "Single-deck pallets, also known as skids, are lightweight and easy to handle.",
-      image: "/assets/pallets/single-deck.svg",
+      image: "/assets/pallets/single-deck-pallet.png",
     },
     {
       id: "reversible-closed",
       name: "Reversible Closed Pallet",
       description:
         "Closed-boarded pallet with reversible design for longer operational life.",
-      image: "/assets/pallets/reversible-closed.svg",
+      image: "/assets/pallets/reversible-closed-pallet.png",
     },
     {
       id: "four-way-non-reversible",
       name: "Four-Way Non-Reversal Pallet",
       description:
         "Four-way entry pallet with different top and bottom faces designed for industrial applications.",
-      image: "/assets/pallets/four-way-non-reversible.svg",
+      image: "/assets/pallets/four-way-non-reversible.png",
     },
   ],
 };
@@ -444,7 +444,7 @@ export const INDUSTRIAL_PRODUCTS_CONTENT = {
     subtitle: "Heavy-Duty Wooden Cable Drums, Boxes & Crates",
     description:
       "Engineered industrial packaging products providing maximum protection and reliability for heavy equipment and sensitive cargo.",
-    image: "/assets/industrial-products/cable-drums.svg",
+    image: "/assets/industrial-products/wooden-cable-drum.png",
   },
   products: [
     {
@@ -452,7 +452,7 @@ export const INDUSTRIAL_PRODUCTS_CONTENT = {
       name: "Wooden Cable Drums",
       description:
         "Heavy-duty wooden cable drums designed for industrial cable storage and transportation.",
-      image: "/assets/industrial-products/cable-drums.svg",
+      image: "/assets/industrial-products/wooden-cable-drum.png",
       details: [
         "Reinforced wooden flange and barrel construction",
         "Suitable for electrical cables, wire ropes, and conductors",
@@ -464,7 +464,7 @@ export const INDUSTRIAL_PRODUCTS_CONTENT = {
       name: "Wooden Boxes",
       description:
         "Durable wooden boxes suitable for machinery packaging and export shipments.",
-      image: "/assets/industrial-products/wooden-boxes.svg",
+      image: "/assets/industrial-products/wooden-box.png",
       details: [
         "Full enclosure protection against moisture, impact, and dust",
         "Engineered for heavy industrial machinery and equipment",
@@ -476,7 +476,7 @@ export const INDUSTRIAL_PRODUCTS_CONTENT = {
       name: "Wooden Crates",
       description:
         "Industrial wooden crates designed for safe transportation and handling of industrial products.",
-      image: "/assets/industrial-products/wooden-crates.svg",
+      image: "/assets/industrial-products/wooden-crate.png",
       details: [
         "Open-slatted or reinforced frames for structural rigidity",
         "Optimized for high weight-to-volume ratio items",

@@ -58,12 +58,12 @@ export default function PalletsPage() {
           {/* Two-Way Wooden Pallet */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             <div className="lg:col-span-6 relative">
-              <div className="relative w-full h-[320px] sm:h-[380px] rounded-2xl overflow-hidden shadow-card border border-timber-200">
+              <div className="relative w-full h-[320px] sm:h-[380px] rounded-2xl overflow-hidden shadow-card border border-timber-200 bg-white">
                 <Image
                   src={twoWay.image}
                   alt={twoWay.title}
                   fill
-                  className="object-cover"
+                  className="object-contain p-4"
                 />
               </div>
               <div className="absolute top-4 left-4 bg-timber-700 text-white text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-md shadow-md">
@@ -112,12 +112,12 @@ export default function PalletsPage() {
           {/* Four-Way Wooden Pallet */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             <div className="lg:col-span-6 lg:order-2 relative">
-              <div className="relative w-full h-[320px] sm:h-[380px] rounded-2xl overflow-hidden shadow-card border border-timber-200">
+              <div className="relative w-full h-[320px] sm:h-[380px] rounded-2xl overflow-hidden shadow-card border border-timber-200 bg-white">
                 <Image
                   src={fourWay.image}
                   alt={fourWay.title}
                   fill
-                  className="object-cover"
+                  className="object-contain p-4"
                 />
               </div>
               <div className="absolute top-4 left-4 bg-forest-800 text-white text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-md shadow-md">
@@ -179,12 +179,12 @@ export default function PalletsPage() {
                 className="flex flex-col justify-between overflow-hidden border-timber-200 bg-white group"
               >
                 <div>
-                  <div className="relative w-full h-48 bg-charcoal-100">
+                  <div className="relative w-full h-52 bg-white border-b border-timber-100 p-2">
                     <Image
                       src={pallet.image}
                       alt={pallet.name}
                       fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="object-contain p-2 group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
                   <div className="p-6">

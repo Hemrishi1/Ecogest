@@ -68,12 +68,12 @@ export default function ManufacturingPage() {
                 className="flex flex-col justify-between overflow-hidden border-timber-200 group"
               >
                 <div>
-                  <div className="relative w-full h-48 bg-charcoal-100">
+                  <div className="relative w-full h-52 bg-white border-b border-timber-100 p-2">
                     <Image
                       src={item.image}
                       alt={item.name}
                       fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="object-contain p-2 group-hover:scale-105 transition-transform duration-500"
                     />
                     {item.badge && (
                       <div className="absolute top-3 right-3 bg-timber-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">

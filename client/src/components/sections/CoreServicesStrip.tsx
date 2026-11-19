@@ -45,13 +45,13 @@ export function CoreServicesStrip() {
               className="flex flex-col justify-between group overflow-hidden bg-white border border-timber-200/80 hover:border-timber-400"
             >
               <div>
-                {/* Image Placeholder Frame */}
-                <div className="relative w-full h-48 bg-charcoal-100 overflow-hidden">
+                {/* Image Frame */}
+                <div className="relative w-full h-52 bg-white border-b border-timber-100 overflow-hidden p-2">
                   <Image
                     src={service.image}
                     alt={service.title}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="object-contain p-2 group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-sm p-2 rounded-lg shadow-sm border border-timber-200">
                     {ICON_MAP[service.icon]}

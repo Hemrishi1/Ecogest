@@ -68,12 +68,12 @@ export default function IndustrialProductsPage() {
                     isEven ? "lg:order-2" : ""
                   }`}
                 >
-                  <div className="relative w-full h-[320px] sm:h-[380px] rounded-2xl overflow-hidden shadow-card border border-timber-200">
+                  <div className="relative w-full h-[320px] sm:h-[380px] rounded-2xl overflow-hidden shadow-card border border-timber-200 bg-white">
                     <Image
                       src={product.image}
                       alt={product.name}
                       fill
-                      className="object-cover"
+                      className="object-contain p-4"
                     />
                   </div>
                 </div>

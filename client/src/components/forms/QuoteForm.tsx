@@ -1,10 +1,15 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import { Send, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
+import { Turnstile } from "@marsidev/react-turnstile";
 import { submitQuoteForm, QuoteFormData } from "@/lib/api";
 import { QUOTE_CONTENT } from "@/content/site-content";
 import { Button } from "@/components/ui/Button";
+
+const TURNSTILE_SITE_KEY =
+  process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "1x00000000000000000000AA";
 
 interface QuoteFormProps {
   defaultProduct?: string;
@@ -19,8 +24,11 @@ export function QuoteForm({ defaultProduct }: QuoteFormProps) {
     productInterest: defaultProduct || QUOTE_CONTENT.productOptions[0],
     quantity: "",
     message: "",
+    privacyConsent: false,
   });
 
+  const [turnstileToken, setTurnstileToken] = useState<string>("");
+  const [honeypot, setHoneypot] = useState<string>("");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -39,10 +47,26 @@ export function QuoteForm({ defaultProduct }: QuoteFormProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!formData.privacyConsent) {
+      setError("Please accept the privacy policy to proceed.");
+      return;
+    }
+
+    if (!turnstileToken && process.env.NODE_ENV === "production") {
+      setError("Please complete the security verification challenge.");
+      return;
+    }
+
     setLoading(true);
     setError(null);
 
-    const res = await submitQuoteForm(formData);
+    const res = await submitQuoteForm({
+      ...formData,
+      turnstileToken: turnstileToken || "dev-turnstile-token",
+      honeypot,
+    });
+
     setLoading(false);
 
     if (res.success) {
@@ -55,7 +79,10 @@ export function QuoteForm({ defaultProduct }: QuoteFormProps) {
         productInterest: defaultProduct || QUOTE_CONTENT.productOptions[0],
         quantity: "",
         message: "",
+        privacyConsent: false,
       });
+      setTurnstileToken("");
+      setHoneypot("");
     } else {
       setError(res.message);
     }
@@ -103,6 +130,20 @@ export function QuoteForm({ defaultProduct }: QuoteFormProps) {
           <span>{error}</span>
         </div>
       )}
+
+      {/* Hidden Honeypot Field */}
+      <div className="hidden" aria-hidden="true">
+        <label htmlFor="quote_website_hp">Leave this empty</label>
+        <input
+          id="quote_website_hp"
+          type="text"
+          name="website_hp"
+          tabIndex={-1}
+          autoComplete="off"
+          value={honeypot}
+          onChange={(e) => setHoneypot(e.target.value)}
+        />
+      </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
@@ -213,6 +254,45 @@ export function QuoteForm({ defaultProduct }: QuoteFormProps) {
           onChange={handleChange}
           placeholder="Please specify timber species, dimensions, load requirements (dynamic/static), heat treatment needs (ISPM-15), delivery location..."
           className="w-full px-4 py-2.5 rounded-lg border border-charcoal-200 text-sm focus:outline-none focus:ring-2 focus:ring-timber-500 focus:border-transparent transition-all resize-none"
+        />
+      </div>
+
+      {/* Privacy Consent Checkbox */}
+      <div className="flex items-start gap-2.5 pt-1">
+        <input
+          type="checkbox"
+          id="quote-privacy"
+          required
+          checked={formData.privacyConsent}
+          onChange={(e) =>
+            setFormData((prev) => ({
+              ...prev,
+              privacyConsent: e.target.checked,
+            }))
+          }
+          className="mt-1 h-4 w-4 rounded border-charcoal-300 text-forest-700 focus:ring-forest-600 cursor-pointer"
+        />
+        <label htmlFor="quote-privacy" className="text-xs text-charcoal-600 leading-relaxed cursor-pointer">
+          I consent to the collection and processing of my business details as outlined in the{" "}
+          <Link href="/privacy" target="_blank" className="text-forest-700 underline font-medium hover:text-timber-700">
+            Privacy Policy
+          </Link>
+          . *
+        </label>
+      </div>
+
+      {/* Cloudflare Turnstile Challenge */}
+      <div className="pt-1 flex justify-start">
+        <Turnstile
+          siteKey={TURNSTILE_SITE_KEY}
+          onSuccess={(token) => {
+            setTurnstileToken(token);
+            if (error) setError(null);
+          }}
+          onError={() => {
+            console.warn("[Turnstile] Challenge load error");
+          }}
+          onExpire={() => setTurnstileToken("")}
         />
       </div>
 

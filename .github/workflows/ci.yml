@@ -1,0 +1,43 @@
+name: CI Security & Quality Pipeline
+
+on:
+  push:
+    branches: [ "main", "feature/**" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    env:
+      NODE_ENV: test
+      JWT_ACCESS_SECRET: "ci_pipeline_dummy_access_secret_min_32_characters_123"
+      JWT_REFRESH_SECRET: "ci_pipeline_dummy_refresh_secret_min_32_characters_123"
+      JWT_PREAUTH_SECRET: "ci_pipeline_dummy_preauth_secret_min_32_characters_123"
+      TOTP_ENCRYPTION_KEY: "ci_pipeline_dummy_totp_key_min_32_characters_secure"
+      TURNSTILE_SECRET_KEY: "1x0000000000000000000000000000000AA"
+      NEXT_PUBLIC_TURNSTILE_SITE_KEY: "1x00000000000000000000AA"
+      NEXT_PUBLIC_API_URL: "http://localhost:5000"
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Server Unit & Integration Tests
+        run: npm run test:server
+
+      - name: Build Server
+        run: npm run build:server
+
+      - name: Build Client Next.js
+        run: npm run build:client

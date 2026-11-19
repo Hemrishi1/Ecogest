@@ -7,6 +7,9 @@ export interface ContactFormData {
   company?: string;
   subject?: string;
   message: string;
+  privacyConsent: boolean;
+  turnstileToken?: string;
+  honeypot?: string;
 }
 
 export interface QuoteFormData {
@@ -17,6 +20,9 @@ export interface QuoteFormData {
   productInterest: string;
   quantity?: string;
   message: string;
+  privacyConsent: boolean;
+  turnstileToken?: string;
+  honeypot?: string;
 }
 
 export interface ApiResponse<T = any> {

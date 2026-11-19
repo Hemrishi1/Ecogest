@@ -196,3 +196,71 @@ npm run start
 
 - **Frontend hosting**: Can be deployed to Vercel, AWS Amplify, Docker, or any Node.js host.
 - **Backend hosting**: Can be deployed to Railway, Render, Fly.io, AWS EC2, or Docker.
+
+
+---
+
+## 🔒 Security Hardening Architecture
+
+The platform includes an enterprise security-hardening layer across both the Next.js frontend and Express backend:
+
+### 1. Bot Protection & Honeypot
+- **Cloudflare Turnstile**: Embedded on both `QuoteForm` and `ContactForm` using `@marsidev/react-turnstile`.
+- **Server Siteverify**: `server/src/middleware/turnstile.middleware.ts` validates the client turnstile token with Cloudflare's verification API.
+- **Hidden Honeypot**: Detects automated spam bots filling hidden fields (`honeypot` / `website_hp`) and silently returns a fake success response without processing or emailing.
+- **Local Dev Test Keys**: Uses Cloudflare's official dummy pass key (`1x00000000000000000000AA` / `1x0000000000000000000000000000000AA`).
+
+### 2. Email Injection Guard & XSS Sanitization
+- **CRLF Stripping**: `server/src/utils/security.util.ts` (`stripHeaderInjection`) strips `\r`, `\n`, `%0D`, `%0A`, and ASCII control characters from user-controlled fields before passing to Nodemailer headers.
+- **HTML Escaping**: Escapes `<script>`, HTML entities, and injection attempts inside email bodies.
+
+### 3. Security Headers & Strict CSP
+- `client/next.config.js` sets:
+  - `Content-Security-Policy`: Restricts scripts, styles, objects, and connect endpoints to self, Cloudflare Turnstile, and Google Maps embeds.
+  - `Strict-Transport-Security`: `max-age=63072000; includeSubDomains; preload`
+  - `X-Content-Type-Options: nosniff`
+  - `X-Frame-Options: DENY`
+  - `Referrer-Policy: strict-origin-when-cross-origin`
+  - `Permissions-Policy: camera=(), microphone=(), geolocation=()`
+- `X-Powered-By` is explicitly disabled on both Next.js and Express.
+
+### 4. CSRF Protection
+- All state-changing methods (`POST`, `PUT`, `PATCH`, `DELETE`) under `/api/admin` and `/api/auth` strictly require the custom header `X-Requested-With: ecogest-admin` and validate the incoming `Origin` / `Referer`.
+- `client/src/lib/auth-client.ts` automatically injects this security header.
+
+### 5. Admin Two-Factor Authentication (2FA)
+- **TOTP Standard**: Powered by `otplib` and `qrcode`.
+- **At-Rest Encryption**: TOTP secrets are encrypted at rest using AES-256-GCM via `TOTP_ENCRYPTION_KEY` in `server/data/admins.json`.
+- **One-Time Recovery Codes**: Upon enrollment, 10 single-use recovery codes (`ECO-XXXXX-XXXXX`) are generated, bcrypt-hashed, and burned on use.
+- **Replay Prevention**: Enforces single-use verification per 30-second TOTP time window.
+- **Two-Step Login**: Step 1 validates password and issues a 5-minute `pre-auth` JWT. Step 2 requires TOTP or a recovery code before granting access.
+- **Enforcement Banner**: Persistent banner displayed to admins without 2FA; can be strictly mandated with `REQUIRE_2FA=true`.
+- **Recovery CLI**: Disable 2FA for an admin account via CLI:
+  ```bash
+  npm run reset-2fa --workspace=server -- --email=admin@ecogestindia.com
+  ```
+
+### 6. Append-Only Audit Logging
+- Security events (`login`, `2fa_verify`, `lockout`, `submission_view`, `submission_delete`, `2fa_enroll`, `2fa_reset`, `retention_purge`) are appended in JSON Lines format to `server/data/audit.log`.
+- **Monthly Rotation**: Automatically rotated into `server/data/audit-YYYY-MM.log`.
+- **Zero Credential Leakage**: Sanitization layer strips all sensitive fields (`password`, `token`, `secret`, `code`).
+- **Admin Viewer**: View and filter audit logs directly at `/admin/audit`.
+
+### 7. Strict Startup Environment Validation
+- `server/src/config/env.ts` and `client/src/lib/env.ts` use Zod to validate all environment variables at startup.
+- The server will immediately halt with a clear error message if secrets (`JWT_ACCESS_SECRET`, `JWT_REFRESH_SECRET`, `JWT_PREAUTH_SECRET`, `TOTP_ENCRYPTION_KEY`) are missing or under 32 characters long.
+
+### 8. Data Retention & Backups
+- **Daily Purge**: `server/src/services/retention.service.ts` runs a daily cron job to purge submissions older than `RETENTION_DAYS` (default 365) and logs the count to audit.
+- **Backup Archive CLI**:
+  ```bash
+  npm run backup --workspace=server
+  ```
+  Generates a timestamped `.tar.gz` archive of all JSON datastores in `server/backups/`.
+
+### 9. Repo Hygiene & Security Policy
+- `.github/dependabot.yml`: Weekly npm dependency vulnerability updates.
+- `.github/workflows/ci.yml`: Automated CI pipeline running unit tests and production builds.
+- `client/public/.well-known/security.txt`: RFC 9116 compliant security contact policy.
+- `DEPLOYMENT-SECURITY.md`: Pre-flight deployment checklist and operational runbook.
+- `/privacy`: Transparent privacy policy detailing data collection, processing, and deletion rights.

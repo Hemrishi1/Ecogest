@@ -1,5 +1,6 @@
 import nodemailer from "nodemailer";
 import { config } from "../config/environment";
+import { stripHeaderInjection, escapeHtml } from "../utils/security.util";
 
 let transporter: nodemailer.Transporter | null = null;
 
@@ -34,10 +35,17 @@ export async function sendContactNotification(contactData: {
   subject?: string;
   message: string;
 }): Promise<boolean> {
+  // Sanitize headers against CRLF injection
+  const cleanName = stripHeaderInjection(contactData.name);
+  const cleanEmail = stripHeaderInjection(contactData.email);
+  const cleanSubject = stripHeaderInjection(contactData.subject || "General Inquiry");
+  const cleanCompany = stripHeaderInjection(contactData.company || "N/A");
+  const cleanPhone = stripHeaderInjection(contactData.phone);
+
   const mailer = getTransporter();
   if (!mailer) {
     console.log(
-      `[MailService] Simulation: Contact email from ${contactData.name} <${contactData.email}> - "${contactData.subject || "General Inquiry"}"`
+      `[MailService] Simulation: Contact email from ${cleanName} <${cleanEmail}> - "${cleanSubject}"`
     );
     return true;
   }
@@ -45,18 +53,18 @@ export async function sendContactNotification(contactData: {
   const mailOptions = {
     from: config.smtp.from,
     to: config.smtp.to,
-    replyTo: contactData.email,
-    subject: `[Ecogest India Contact] ${contactData.subject || "New Inquiry from " + contactData.name}`,
+    replyTo: cleanEmail,
+    subject: `[Ecogest India Contact] ${cleanSubject} from ${cleanName}`,
     html: `
       <h2>New Contact Form Submission - Ecogest India</h2>
-      <p><strong>Name:</strong> ${contactData.name}</p>
-      <p><strong>Email:</strong> ${contactData.email}</p>
-      <p><strong>Phone:</strong> ${contactData.phone}</p>
-      <p><strong>Company:</strong> ${contactData.company || "N/A"}</p>
-      <p><strong>Subject:</strong> ${contactData.subject || "N/A"}</p>
+      <p><strong>Name:</strong> ${escapeHtml(cleanName)}</p>
+      <p><strong>Email:</strong> ${escapeHtml(cleanEmail)}</p>
+      <p><strong>Phone:</strong> ${escapeHtml(cleanPhone)}</p>
+      <p><strong>Company:</strong> ${escapeHtml(cleanCompany)}</p>
+      <p><strong>Subject:</strong> ${escapeHtml(cleanSubject)}</p>
       <hr />
       <h3>Message:</h3>
-      <p style="white-space: pre-line;">${contactData.message}</p>
+      <p style="white-space: pre-line;">${escapeHtml(contactData.message)}</p>
     `,
   };
 
@@ -79,10 +87,18 @@ export async function sendQuoteNotification(quoteData: {
   quantity?: string;
   message: string;
 }): Promise<boolean> {
+  // Sanitize headers against CRLF injection
+  const cleanName = stripHeaderInjection(quoteData.name);
+  const cleanCompany = stripHeaderInjection(quoteData.company);
+  const cleanEmail = stripHeaderInjection(quoteData.email);
+  const cleanPhone = stripHeaderInjection(quoteData.phone);
+  const cleanProduct = stripHeaderInjection(quoteData.productInterest);
+  const cleanQuantity = stripHeaderInjection(quoteData.quantity || "N/A");
+
   const mailer = getTransporter();
   if (!mailer) {
     console.log(
-      `[MailService] Simulation: Quote email from ${quoteData.name} (${quoteData.company}) - Interest: ${quoteData.productInterest}`
+      `[MailService] Simulation: Quote email from ${cleanName} (${cleanCompany}) - Interest: ${cleanProduct}`
     );
     return true;
   }
@@ -90,19 +106,19 @@ export async function sendQuoteNotification(quoteData: {
   const mailOptions = {
     from: config.smtp.from,
     to: config.smtp.to,
-    replyTo: quoteData.email,
-    subject: `[Ecogest India Quote Request] ${quoteData.company} - ${quoteData.productInterest}`,
+    replyTo: cleanEmail,
+    subject: `[Ecogest India Quote Request] ${cleanCompany} - ${cleanProduct}`,
     html: `
       <h2>New Quote Request - Ecogest India</h2>
-      <p><strong>Contact Name:</strong> ${quoteData.name}</p>
-      <p><strong>Company:</strong> ${quoteData.company}</p>
-      <p><strong>Email:</strong> ${quoteData.email}</p>
-      <p><strong>Phone:</strong> ${quoteData.phone}</p>
-      <p><strong>Product Interest:</strong> ${quoteData.productInterest}</p>
-      <p><strong>Estimated Quantity:</strong> ${quoteData.quantity || "N/A"}</p>
+      <p><strong>Contact Name:</strong> ${escapeHtml(cleanName)}</p>
+      <p><strong>Company:</strong> ${escapeHtml(cleanCompany)}</p>
+      <p><strong>Email:</strong> ${escapeHtml(cleanEmail)}</p>
+      <p><strong>Phone:</strong> ${escapeHtml(cleanPhone)}</p>
+      <p><strong>Product Interest:</strong> ${escapeHtml(cleanProduct)}</p>
+      <p><strong>Estimated Quantity:</strong> ${escapeHtml(cleanQuantity)}</p>
       <hr />
       <h3>Project Specifications:</h3>
-      <p style="white-space: pre-line;">${quoteData.message}</p>
+      <p style="white-space: pre-line;">${escapeHtml(quoteData.message)}</p>
     `,
   };
 

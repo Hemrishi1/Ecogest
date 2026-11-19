@@ -109,7 +109,7 @@ export default function QualityPage() {
             <div className="lg:col-span-5 relative">
               <div className="relative w-full h-[280px] rounded-xl overflow-hidden shadow-card border border-timber-200 bg-white p-4">
                 <Image
-                  src="/assets/icons/ispm15-stamp.svg"
+                  src="/assets/icons/ispm15-stamp.png"
                   alt="ISPM-15 IPPC Heat Treatment Standard Stamp"
                   fill
                   className="object-contain"

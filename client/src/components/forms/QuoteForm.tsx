@@ -156,7 +156,7 @@ export function QuoteForm({ defaultProduct }: QuoteFormProps) {
             required
             value={formData.name}
             onChange={handleChange}
-            placeholder="John Doe"
+            placeholder="Ram Prasad"
             className="w-full px-4 py-2.5 rounded-lg border border-charcoal-200 text-sm focus:outline-none focus:ring-2 focus:ring-timber-500 focus:border-transparent transition-all"
           />
         </div>
@@ -186,7 +186,7 @@ export function QuoteForm({ defaultProduct }: QuoteFormProps) {
             required
             value={formData.email}
             onChange={handleChange}
-            placeholder="john@company.com"
+            placeholder="ram@company.com"
             className="w-full px-4 py-2.5 rounded-lg border border-charcoal-200 text-sm focus:outline-none focus:ring-2 focus:ring-timber-500 focus:border-transparent transition-all"
           />
         </div>
@@ -201,7 +201,7 @@ export function QuoteForm({ defaultProduct }: QuoteFormProps) {
             required
             value={formData.phone}
             onChange={handleChange}
-            placeholder="+91 98765 43210"
+            placeholder="+91 98xxxxxx56"
             className="w-full px-4 py-2.5 rounded-lg border border-charcoal-200 text-sm focus:outline-none focus:ring-2 focus:ring-timber-500 focus:border-transparent transition-all"
           />
         </div>

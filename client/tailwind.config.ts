@@ -71,6 +71,15 @@ const config: Config = {
         card: "0 4px 20px -2px rgba(47, 30, 12, 0.08)",
         elevated: "0 10px 30px -5px rgba(29, 75, 36, 0.12)",
       },
+      keyframes: {
+        marquee: {
+          "0%": { transform: "translateX(0%)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
+      },
+      animation: {
+        marquee: "marquee 28s linear infinite",
+      },
     },
   },
   plugins: [],

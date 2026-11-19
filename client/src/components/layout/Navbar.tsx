@@ -41,16 +41,64 @@ export function Navbar() {
 
   return (
     <>
-      {/* Top Utility Bar */}
-      <div className="bg-forest-900 text-cream-100 text-xs py-2 border-b border-forest-800 hidden md:block">
-        <Container className="flex items-center justify-between">
-          <div className="flex items-center space-x-6">
-            <span className="flex items-center gap-1.5 text-timber-200">
-              <ShieldCheck className="w-3.5 h-3.5 text-timber-300" />
-              European Softwood Timber Sourcing • ISPM-15 Export Standards
-            </span>
+      {/* Top Utility Bar with Continuous Circular Ticker */}
+      <div className="bg-forest-900 text-cream-100 text-xs py-2 border-b border-forest-800 overflow-hidden">
+        <Container className="flex items-center justify-between gap-4 max-w-[1440px]">
+          {/* Continuous Circular Marquee Ticker */}
+          <div className="flex-1 overflow-hidden relative [mask-image:linear-gradient(to_right,transparent,black_4%,black_96%,transparent)] py-0.5">
+            <div className="flex w-max animate-marquee hover:[animation-play-state:paused] cursor-default">
+              {/* Set 1 */}
+              <div className="flex items-center gap-6 pr-6 shrink-0">
+                <span className="flex items-center gap-1.5 text-timber-200 whitespace-nowrap">
+                  <ShieldCheck className="w-3.5 h-3.5 text-timber-300 shrink-0" />
+                  European Softwood Timber Sourcing • ISPM-15 Export Standards
+                </span>
+                <span className="text-forest-700 select-none">•</span>
+                <span className="flex items-center gap-1.5 text-timber-200 whitespace-nowrap">
+                  <ShieldCheck className="w-3.5 h-3.5 text-timber-300 shrink-0" />
+                  Direct Softwood Lumber Imports from Europe & South America
+                </span>
+                <span className="text-forest-700 select-none">•</span>
+                <span className="flex items-center gap-1.5 text-timber-200 whitespace-nowrap">
+                  <ShieldCheck className="w-3.5 h-3.5 text-timber-300 shrink-0" />
+                  Heat-Treated Industrial Wooden Pallets & Packaging
+                </span>
+                <span className="text-forest-700 select-none">•</span>
+                <span className="flex items-center gap-1.5 text-timber-200 whitespace-nowrap">
+                  <ShieldCheck className="w-3.5 h-3.5 text-timber-300 shrink-0" />
+                  Kiln-Dried European Pine & Spruce Timber
+                </span>
+                <span className="text-forest-700 select-none">•</span>
+              </div>
+
+              {/* Set 2 (Exact Duplicate for Seamless Infinite Circular Loop) */}
+              <div className="flex items-center gap-6 pr-6 shrink-0" aria-hidden="true">
+                <span className="flex items-center gap-1.5 text-timber-200 whitespace-nowrap">
+                  <ShieldCheck className="w-3.5 h-3.5 text-timber-300 shrink-0" />
+                  European Softwood Timber Sourcing • ISPM-15 Export Standards
+                </span>
+                <span className="text-forest-700 select-none">•</span>
+                <span className="flex items-center gap-1.5 text-timber-200 whitespace-nowrap">
+                  <ShieldCheck className="w-3.5 h-3.5 text-timber-300 shrink-0" />
+                  Direct Softwood Lumber Imports from Europe & South America
+                </span>
+                <span className="text-forest-700 select-none">•</span>
+                <span className="flex items-center gap-1.5 text-timber-200 whitespace-nowrap">
+                  <ShieldCheck className="w-3.5 h-3.5 text-timber-300 shrink-0" />
+                  Heat-Treated Industrial Wooden Pallets & Packaging
+                </span>
+                <span className="text-forest-700 select-none">•</span>
+                <span className="flex items-center gap-1.5 text-timber-200 whitespace-nowrap">
+                  <ShieldCheck className="w-3.5 h-3.5 text-timber-300 shrink-0" />
+                  Kiln-Dried European Pine & Spruce Timber
+                </span>
+                <span className="text-forest-700 select-none">•</span>
+              </div>
+            </div>
           </div>
-          <div className="flex items-center space-x-6">
+
+          {/* Right Utility Contact Links */}
+          <div className="hidden md:flex items-center space-x-6 shrink-0 whitespace-nowrap">
             <a
               href={`https://wa.me/919321233436?text=${encodeURIComponent(
                 "Hello Ecogest India, I would like to inquire about softwood timber and packaging solutions."

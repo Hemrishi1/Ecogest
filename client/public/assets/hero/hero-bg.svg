@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#15381B"/>
+      <stop offset="60%" stop-color="#1D4B24"/>
+      <stop offset="100%" stop-color="#2F1E0C"/>
+    </linearGradient>
+    <pattern id="gridPattern" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#FCFBF8" stroke-width="1" stroke-opacity="0.05"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="600" fill="url(#bgGrad)"/>
+  <rect width="1200" height="600" fill="url(#gridPattern)"/>
+
+  <!-- European Softwood Silhouette & Lumber Yard Graphic -->
+  <g opacity="0.25">
+    <polygon points="150,550 200,300 250,550" fill="#276230"/>
+    <polygon points="220,550 270,250 320,550" fill="#377C42"/>
+    <polygon points="300,550 360,200 420,550" fill="#276230"/>
+    <polygon points="400,550 480,270 560,550" fill="#1E4921"/>
+    <!-- Stack of Timber Sawn Planks -->
+    <rect x="700" y="380" width="420" height="30" rx="4" fill="#B89664" />
+    <rect x="680" y="415" width="450" height="30" rx="4" fill="#9C763C" />
+    <rect x="660" y="450" width="480" height="30" rx="4" fill="#7E5B29" />
+    <rect x="640" y="485" width="510" height="30" rx="4" fill="#62441E" />
+    <rect x="620" y="520" width="540" height="30" rx="4" fill="#483115" />
+  </g>
+
+  <!-- Watermark badge -->
+  <rect x="80" y="480" width="420" height="50" rx="8" fill="#15381B" fill-opacity="0.85" stroke="#9C763C" stroke-width="1.5"/>
+  <text x="100" y="512" font-family="'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="600" fill="#FCFBF8" letter-spacing="1.5">
+    [PLACEHOLDER: assets/hero/hero-bg.svg]
+  </text>
+</svg>

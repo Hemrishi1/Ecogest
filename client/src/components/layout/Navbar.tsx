@@ -22,15 +22,31 @@ import { cn } from "@/lib/utils";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
+    let lastScrollY = window.scrollY;
+
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      const currentScrollY = window.scrollY;
+
+      setIsScrolled(currentScrollY > 20);
+
+      // Disappear when scrolling down, reappear when scrolling up
+      if (currentScrollY > lastScrollY && currentScrollY > 60) {
+        setIsVisible(false);
+        setDropdownOpen(false);
+      } else {
+        setIsVisible(true);
+      }
+
+      lastScrollY = currentScrollY;
     };
-    window.addEventListener("scroll", handleScroll);
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -168,7 +184,8 @@ export function Navbar() {
       {/* Main Sticky Navigation */}
       <header
         className={cn(
-          "sticky top-0 z-40 transition-all duration-300 w-full",
+          "sticky top-0 z-40 transition-all duration-300 ease-in-out w-full",
+          isVisible ? "translate-y-0" : "-translate-y-full shadow-none pointer-events-none",
           isScrolled
             ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-timber-100 py-1.5 sm:py-2"
             : "bg-white border-b border-timber-100 py-2 sm:py-3"

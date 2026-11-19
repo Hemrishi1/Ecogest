@@ -11,6 +11,7 @@ import {
   X,
   ArrowRight,
   ShieldCheck,
+  Mail,
 } from "lucide-react";
 import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 import { NAVIGATION_LINKS, SITE_METADATA } from "@/content/site-content";
@@ -41,92 +42,127 @@ export function Navbar() {
 
   return (
     <>
-      {/* Top Utility Bar with Continuous Circular Ticker */}
+      {/* Top Utility Bar with Continuous Circular Ticker (including Contact Details) */}
       <div className="bg-forest-900 text-cream-100 text-xs py-2 border-b border-forest-800 overflow-hidden">
-        <Container className="flex items-center justify-between gap-4 max-w-[1440px]">
-          {/* Continuous Circular Marquee Ticker */}
-          <div className="flex-1 overflow-hidden relative [mask-image:linear-gradient(to_right,transparent,black_4%,black_96%,transparent)] py-0.5">
-            <div className="flex w-max animate-marquee hover:[animation-play-state:paused] cursor-default">
-              {/* Set 1 */}
-              <div className="flex items-center gap-6 pr-6 shrink-0">
-                <span className="flex items-center gap-1.5 text-timber-200 whitespace-nowrap">
-                  <ShieldCheck className="w-3.5 h-3.5 text-timber-300 shrink-0" />
-                  European Softwood Timber Sourcing • ISPM-15 Export Standards
-                </span>
-                <span className="text-forest-700 select-none">•</span>
-                <span className="flex items-center gap-1.5 text-timber-200 whitespace-nowrap">
-                  <ShieldCheck className="w-3.5 h-3.5 text-timber-300 shrink-0" />
-                  Direct Softwood Lumber Imports from Europe & South America
-                </span>
-                <span className="text-forest-700 select-none">•</span>
-                <span className="flex items-center gap-1.5 text-timber-200 whitespace-nowrap">
-                  <ShieldCheck className="w-3.5 h-3.5 text-timber-300 shrink-0" />
-                  Heat-Treated Industrial Wooden Pallets & Packaging
-                </span>
-                <span className="text-forest-700 select-none">•</span>
-                <span className="flex items-center gap-1.5 text-timber-200 whitespace-nowrap">
-                  <ShieldCheck className="w-3.5 h-3.5 text-timber-300 shrink-0" />
-                  Kiln-Dried European Pine & Spruce Timber
-                </span>
-                <span className="text-forest-700 select-none">•</span>
-              </div>
+        <div className="w-full overflow-hidden relative [mask-image:linear-gradient(to_right,transparent,black_2%,black_98%,transparent)]">
+          <div className="flex w-max animate-marquee hover:[animation-play-state:paused] cursor-default">
+            {/* Set 1 */}
+            <div className="flex items-center gap-8 pr-8 shrink-0">
+              <span className="flex items-center gap-1.5 text-timber-200 whitespace-nowrap">
+                <ShieldCheck className="w-3.5 h-3.5 text-timber-300 shrink-0" />
+                European Softwood Timber Sourcing • ISPM-15 Export Standards
+              </span>
 
-              {/* Set 2 (Exact Duplicate for Seamless Infinite Circular Loop) */}
-              <div className="flex items-center gap-6 pr-6 shrink-0" aria-hidden="true">
-                <span className="flex items-center gap-1.5 text-timber-200 whitespace-nowrap">
-                  <ShieldCheck className="w-3.5 h-3.5 text-timber-300 shrink-0" />
-                  European Softwood Timber Sourcing • ISPM-15 Export Standards
-                </span>
-                <span className="text-forest-700 select-none">•</span>
-                <span className="flex items-center gap-1.5 text-timber-200 whitespace-nowrap">
-                  <ShieldCheck className="w-3.5 h-3.5 text-timber-300 shrink-0" />
-                  Direct Softwood Lumber Imports from Europe & South America
-                </span>
-                <span className="text-forest-700 select-none">•</span>
-                <span className="flex items-center gap-1.5 text-timber-200 whitespace-nowrap">
-                  <ShieldCheck className="w-3.5 h-3.5 text-timber-300 shrink-0" />
-                  Heat-Treated Industrial Wooden Pallets & Packaging
-                </span>
-                <span className="text-forest-700 select-none">•</span>
-                <span className="flex items-center gap-1.5 text-timber-200 whitespace-nowrap">
-                  <ShieldCheck className="w-3.5 h-3.5 text-timber-300 shrink-0" />
-                  Kiln-Dried European Pine & Spruce Timber
-                </span>
-                <span className="text-forest-700 select-none">•</span>
-              </div>
+              <span className="text-forest-700 select-none">•</span>
+
+              <a
+                href={`https://wa.me/919321233436?text=${encodeURIComponent(
+                  "Hello Ecogest India, I would like to inquire about softwood timber and packaging solutions."
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 hover:text-[#25D366] transition-colors whitespace-nowrap text-cream-100"
+              >
+                <WhatsAppIcon className="w-3.5 h-3.5 text-[#25D366] shrink-0" />
+                <span>WhatsApp: +91 9321233436</span>
+              </a>
+
+              <span className="text-forest-700 select-none">•</span>
+
+              <a
+                href={`tel:${SITE_METADATA.phoneClean}`}
+                className="flex items-center gap-1.5 hover:text-timber-300 transition-colors whitespace-nowrap text-cream-100"
+              >
+                <Phone className="w-3.5 h-3.5 text-timber-400 shrink-0" />
+                <span>Call: {SITE_METADATA.phone}</span>
+              </a>
+
+              <span className="text-forest-700 select-none">•</span>
+
+              <a
+                href={`mailto:${SITE_METADATA.email}`}
+                className="flex items-center gap-1.5 hover:text-timber-300 transition-colors whitespace-nowrap text-cream-100"
+              >
+                <Mail className="w-3.5 h-3.5 text-timber-400 shrink-0" />
+                <span>{SITE_METADATA.email}</span>
+              </a>
+
+              <span className="text-forest-700 select-none">•</span>
+
+              <span className="flex items-center gap-1.5 text-timber-200 whitespace-nowrap">
+                <ShieldCheck className="w-3.5 h-3.5 text-timber-300 shrink-0" />
+                Direct Softwood Lumber Imports from Europe & South America
+              </span>
+
+              <span className="text-forest-700 select-none">•</span>
+
+              <span className="flex items-center gap-1.5 text-timber-200 whitespace-nowrap">
+                <ShieldCheck className="w-3.5 h-3.5 text-timber-300 shrink-0" />
+                Heat-Treated Industrial Wooden Pallets & Packaging Solutions
+              </span>
+
+              <span className="text-forest-700 select-none">•</span>
+            </div>
+
+            {/* Set 2 (Exact Duplicate for Seamless Continuous Circular Loop) */}
+            <div className="flex items-center gap-8 pr-8 shrink-0" aria-hidden="true">
+              <span className="flex items-center gap-1.5 text-timber-200 whitespace-nowrap">
+                <ShieldCheck className="w-3.5 h-3.5 text-timber-300 shrink-0" />
+                European Softwood Timber Sourcing • ISPM-15 Export Standards
+              </span>
+
+              <span className="text-forest-700 select-none">•</span>
+
+              <a
+                href={`https://wa.me/919321233436?text=${encodeURIComponent(
+                  "Hello Ecogest India, I would like to inquire about softwood timber and packaging solutions."
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 hover:text-[#25D366] transition-colors whitespace-nowrap text-cream-100"
+              >
+                <WhatsAppIcon className="w-3.5 h-3.5 text-[#25D366] shrink-0" />
+                <span>WhatsApp: +91 9321233436</span>
+              </a>
+
+              <span className="text-forest-700 select-none">•</span>
+
+              <a
+                href={`tel:${SITE_METADATA.phoneClean}`}
+                className="flex items-center gap-1.5 hover:text-timber-300 transition-colors whitespace-nowrap text-cream-100"
+              >
+                <Phone className="w-3.5 h-3.5 text-timber-400 shrink-0" />
+                <span>Call: {SITE_METADATA.phone}</span>
+              </a>
+
+              <span className="text-forest-700 select-none">•</span>
+
+              <a
+                href={`mailto:${SITE_METADATA.email}`}
+                className="flex items-center gap-1.5 hover:text-timber-300 transition-colors whitespace-nowrap text-cream-100"
+              >
+                <Mail className="w-3.5 h-3.5 text-timber-400 shrink-0" />
+                <span>{SITE_METADATA.email}</span>
+              </a>
+
+              <span className="text-forest-700 select-none">•</span>
+
+              <span className="flex items-center gap-1.5 text-timber-200 whitespace-nowrap">
+                <ShieldCheck className="w-3.5 h-3.5 text-timber-300 shrink-0" />
+                Direct Softwood Lumber Imports from Europe & South America
+              </span>
+
+              <span className="text-forest-700 select-none">•</span>
+
+              <span className="flex items-center gap-1.5 text-timber-200 whitespace-nowrap">
+                <ShieldCheck className="w-3.5 h-3.5 text-timber-300 shrink-0" />
+                Heat-Treated Industrial Wooden Pallets & Packaging Solutions
+              </span>
+
+              <span className="text-forest-700 select-none">•</span>
             </div>
           </div>
-
-          {/* Right Utility Contact Links */}
-          <div className="hidden md:flex items-center space-x-6 shrink-0 whitespace-nowrap">
-            <a
-              href={`https://wa.me/919321233436?text=${encodeURIComponent(
-                "Hello Ecogest India, I would like to inquire about softwood timber and packaging solutions."
-              )}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 hover:text-[#25D366] transition-colors"
-            >
-              <WhatsAppIcon className="w-3.5 h-3.5 text-[#25D366]" />
-              <span>WhatsApp: +91 9321233436</span>
-            </a>
-            <span className="text-forest-700">|</span>
-            <a
-              href={`tel:${SITE_METADATA.phoneClean}`}
-              className="flex items-center gap-1.5 hover:text-timber-300 transition-colors"
-            >
-              <Phone className="w-3.5 h-3.5 text-timber-400" />
-              <span>{SITE_METADATA.phone}</span>
-            </a>
-            <span className="text-forest-700">|</span>
-            <a
-              href={`mailto:${SITE_METADATA.email}`}
-              className="hover:text-timber-300 transition-colors"
-            >
-              {SITE_METADATA.email}
-            </a>
-          </div>
-        </Container>
+        </div>
       </div>
 
       {/* Main Sticky Navigation */}

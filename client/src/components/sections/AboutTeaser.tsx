@@ -18,7 +18,7 @@ export function AboutTeaser() {
           <div className="lg:col-span-5 relative">
             <div className="relative w-full h-[360px] sm:h-[420px] rounded-2xl overflow-hidden shadow-card border border-timber-200">
               <Image
-                src="/assets/hero/about-hero.svg"
+                src="/assets/hero/about-hero.jpeg"
                 alt="European Timber Heritage - Ecogest India"
                 fill
                 className="object-cover"

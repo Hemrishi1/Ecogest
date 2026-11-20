@@ -105,7 +105,7 @@ export const HOME_CONTENT = {
       { label: "Consistent Indian Supply", value: "10+ Years" },
       { label: "Compliance & Safety", value: "ISPM-15" },
     ],
-    bgImage: "/assets/hero/hero-bg.svg",
+    bgImage: "/assets/hero/hero-bg.jpeg",
   },
   coreServicesHeading: "Our Core Services",
   coreServices: [
@@ -164,7 +164,7 @@ export const HOME_CONTENT = {
     description:
       "Ecogest India Private Limited is built on a strong European softwood timber heritage. Our group companies, including Ecogest SRL Italy and Gatta Marco SRL, have been active in the timber industry since 1984, representing leading productions from Austria and Germany across the European market. With more than a decade of consistent supply to India, Ecogest SRL Italy has exported an average of 30,000 m³ of softwood annually.",
     cta: { label: "Learn More About Our Heritage", href: "/about" },
-    image: "/assets/hero/about-hero.svg",
+    image: "/assets/hero/about-hero.jpeg",
   },
   finalCta: {
     heading: "Ready for Reliable Softwood Timber & Packaging Supply?",
@@ -179,7 +179,7 @@ export const ABOUT_CONTENT = {
   hero: {
     title: "About Us",
     subtitle: "Strong European Softwood Timber Heritage",
-    image: "/assets/hero/about-hero.svg",
+    image: "/assets/hero/about-hero.jpeg",
   },
   heritage: {
     heading: "Strong European Softwood Timber Heritage",
@@ -286,7 +286,7 @@ export const TIMBER_CONTENT = {
         name: "Forestry Products",
         description:
           "Responsibly sourced forestry raw materials conforming to international ecological and trade standards.",
-        image: "/assets/hero/about-hero.svg",
+        image: "/assets/hero/about-hero.jpeg",
       },
     ],
   },
@@ -538,7 +538,7 @@ export const INDUSTRIES_CONTENT = {
     subtitle: "Tailored Softwood Timber & Packaging for Diverse Sectors",
     description:
       "Ecogest India delivers specialized timber and export-compliant wooden packaging solutions tailored to the operational demands of India's leading industrial sectors.",
-    image: "/assets/hero/hero-bg.svg",
+    image: "/assets/hero/hero-bg.jpeg",
   },
   sectors: [
     {

@@ -53,7 +53,7 @@ export function constructMetadata({
       siteName: SITE_METADATA.companyName,
       images: [
         {
-          url: `${SITE_METADATA.siteUrl}/assets/hero/hero-bg.svg`,
+          url: `${SITE_METADATA.siteUrl}/assets/hero/hero-bg.jpeg`,
           width: 1200,
           height: 600,
           alt: SITE_METADATA.companyName,
@@ -64,10 +64,14 @@ export function constructMetadata({
       card: "summary_large_image",
       title: fullTitle,
       description,
-      images: [`${SITE_METADATA.siteUrl}/assets/hero/hero-bg.svg`],
+      images: [`${SITE_METADATA.siteUrl}/assets/hero/hero-bg.jpeg`],
     },
     icons: {
-      icon: "/favicon.svg",
+      icon: [
+        { url: "/favicon.ico" },
+        { url: "/favicon.jpeg", type: "image/jpeg" },
+        { url: "/favicon.png", type: "image/png" },
+      ],
       apple: "/assets/logo/logo-icon.svg",
     },
   };

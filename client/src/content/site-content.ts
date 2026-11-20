@@ -123,7 +123,7 @@ export const HOME_CONTENT = {
       href: "/manufacturing",
       icon: "Factory",
       description: "Export-standard wooden packaging solutions tailored for Indian and international industries.",
-      image: "/assets/hero/manufacturing-hero.svg",
+      image: "/assets/hero/manufacturing-hero.jpg",
     },
     {
       id: "wooden-pallets",
@@ -308,7 +308,7 @@ export const MANUFACTURING_CONTENT = {
     subtitle: "Export-Standard Packaging Solutions",
     description:
       "Expanding beyond trading, Ecogest India is entering manufacturing with a focus on export-standard wooden packaging and pallet solutions.",
-    image: "/assets/hero/manufacturing-hero.svg",
+    image: "/assets/hero/manufacturing-hero.jpg",
   },
   productsHeading: "Our Manufacturing Products",
   products: [

@@ -25,7 +25,18 @@ export default function ManufacturingPage() {
     <>
       {/* Header Banner */}
       <section className="bg-forest-900 text-cream-50 py-16 sm:py-24 relative overflow-hidden">
-        <Container>
+        {hero.image && (
+          <div className="absolute inset-0 opacity-20 pointer-events-none">
+            <Image
+              src={hero.image}
+              alt={hero.title}
+              fill
+              className="object-cover object-center"
+              priority
+            />
+          </div>
+        )}
+        <Container className="relative z-10">
           <div className="max-w-3xl space-y-4">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-forest-800 text-timber-300 text-xs font-semibold uppercase tracking-wider border border-forest-700">
               <Factory className="w-3.5 h-3.5" />

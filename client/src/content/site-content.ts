@@ -115,7 +115,7 @@ export const HOME_CONTENT = {
       href: "/timber",
       icon: "Trees",
       description: "European and South American softwood lumber, kiln-dried sawn timber, and structural wood.",
-      image: "/assets/timber/softwood-lumber.svg",
+      image: "/assets/timber/softwood-lumber.jpeg",
     },
     {
       id: "packaging-manufacturing",
@@ -253,7 +253,7 @@ export const TIMBER_CONTENT = {
     subtitle: "High-Quality Imported Softwood Timber Solutions",
     description:
       "Ecogest India delivers high-quality imported softwood timber backed by strong European sourcing networks and consistent grading standards.",
-    image: "/assets/timber/softwood-lumber.svg",
+    image: "/assets/timber/softwood-lumber.jpeg",
   },
   productRange: {
     heading: "Product Range",
@@ -262,25 +262,25 @@ export const TIMBER_CONTENT = {
         name: "European Softwood Lumber",
         description:
           "Directly sourced from leading sawmills in Austria and Germany with dependable grading and dimensional accuracy.",
-        image: "/assets/timber/softwood-lumber.svg",
+        image: "/assets/timber/softwood-lumber.jpeg",
       },
       {
         name: "South American Softwood Lumber",
         description:
           "High-grade commercial softwood lumber procured through established sustainable international networks.",
-        image: "/assets/timber/softwood-lumber.svg",
+        image: "/assets/timber/softwood-lumber.jpeg",
       },
       {
         name: "Kiln-Dried Sawn Timber",
         description:
           "Controlled moisture content sawn timber ensuring structural stability, dimensional consistency, and pest elimination.",
-        image: "/assets/timber/kiln-dried.svg",
+        image: "/assets/timber/kiln-dried.avif",
       },
       {
         name: "Structural & Industrial Wood",
         description:
           "Heavy-duty graded timber designed for engineering, scaffolding, formwork, and heavy industrial applications.",
-        image: "/assets/timber/structural-wood.svg",
+        image: "/assets/timber/structural-wood.jpeg",
       },
       {
         name: "Forestry Products",

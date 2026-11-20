@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -26,6 +26,51 @@ export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const pathname = usePathname();
+
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const handleMouseEnter = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+    setDropdownOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    timeoutRef.current = setTimeout(() => {
+      setDropdownOpen(false);
+    }, 180);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setDropdownOpen(false);
+      }
+    };
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyDown);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, []);
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
@@ -216,14 +261,22 @@ export function Navbar() {
                 return (
                   <div
                     key={link.label}
-                    className="relative group"
-                    onMouseEnter={() => setDropdownOpen(true)}
-                    onMouseLeave={() => setDropdownOpen(false)}
+                    ref={dropdownRef}
+                    className="relative"
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
                   >
                     <button
+                      type="button"
+                      onClick={() => {
+                        if (timeoutRef.current) clearTimeout(timeoutRef.current);
+                        setDropdownOpen((prev) => !prev);
+                      }}
+                      aria-expanded={dropdownOpen}
+                      aria-haspopup="true"
                       className={cn(
-                        "flex items-center gap-1 px-2.5 xl:px-3 py-2 rounded-md text-sm font-medium transition-colors whitespace-nowrap",
-                        isActive
+                        "flex items-center gap-1 px-2.5 xl:px-3 py-2 rounded-md text-sm font-medium transition-colors whitespace-nowrap cursor-pointer",
+                        isActive || dropdownOpen
                           ? "text-forest-800 font-semibold bg-timber-50"
                           : "text-charcoal-700 hover:text-forest-800 hover:bg-cream-100"
                       )}
@@ -237,31 +290,34 @@ export function Navbar() {
                       />
                     </button>
 
-                    {/* Dropdown Menu */}
+                    {/* Dropdown Menu Container with seamless hover bridge */}
                     <div
                       className={cn(
-                        "absolute top-full left-0 w-72 bg-white rounded-xl shadow-elevated border border-timber-100 p-2 transition-all duration-200 z-50",
+                        "absolute top-full left-0 pt-2 w-72 transition-all duration-200 z-50",
                         dropdownOpen
-                          ? "opacity-100 visible translate-y-1"
-                          : "opacity-0 invisible pointer-events-none translate-y-3"
+                          ? "opacity-100 visible pointer-events-auto translate-y-0"
+                          : "opacity-0 invisible pointer-events-none translate-y-1"
                       )}
                     >
-                      {link.dropdown.map((item) => (
-                        <Link
-                          key={item.label}
-                          href={item.href}
-                          className="block p-3 rounded-lg hover:bg-cream-100 transition-colors group/item"
-                        >
-                          <div className="text-sm font-semibold text-charcoal-900 group-hover/item:text-forest-700">
-                            {item.label}
-                          </div>
-                          {item.description && (
-                            <p className="text-xs text-charcoal-500 mt-0.5 line-clamp-2">
-                              {item.description}
-                            </p>
-                          )}
-                        </Link>
-                      ))}
+                      <div className="bg-white rounded-xl shadow-elevated border border-timber-100 p-2">
+                        {link.dropdown.map((item) => (
+                          <Link
+                            key={item.label}
+                            href={item.href}
+                            onClick={() => setDropdownOpen(false)}
+                            className="block p-3 rounded-lg hover:bg-cream-100 transition-colors group/item"
+                          >
+                            <div className="text-sm font-semibold text-charcoal-900 group-hover/item:text-forest-700">
+                              {item.label}
+                            </div>
+                            {item.description && (
+                              <p className="text-xs text-charcoal-500 mt-0.5 line-clamp-2">
+                                {item.description}
+                              </p>
+                            )}
+                          </Link>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 );
